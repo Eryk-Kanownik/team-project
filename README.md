@@ -25,4 +25,4 @@ Prosta aplikacja zbudowana w node.js która jest czatem.
 - W pliku .env należy zdefiniować port oraz adres serwera (Jeśli uruchamiasz lokalnie to ws://localhost) na jakim ma działać aplikacja
 - W katalogu głównym projektu wpisać `npm install`
 - Następnie należy wpisać `npm run start`
-- Aplikacja powinna się uruchomić http://localhost:{Zdefiniowany port}
+- Aplikacja powinna się uruchomić `http://localhost:{Zdefiniowany port}`
