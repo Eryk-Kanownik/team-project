@@ -5,9 +5,10 @@ Prosta aplikacja zbudowana w node.js która jest czatem.
 ## Opis funkcjonalności
 
 - Frontend
-  - Zapisywanie użytkownika do localStorage
-  - Obsługa zdarzeń wtyczki
-  - Wysyłanie konkretnych zdarzeń wtyczki
+  - Zapisywanie nazwy użytkownika do localStorage
+  - Obsługa zdarzeń z serwera wtyczki odpowiadających w sekcji Backend
+  - Wysyłanie konkretnych zdarzeń do serwera wtyczki
+  - Blokowanie pustego pola wiadomości(Zapobieganie przed wysyłaniem pustych stringów)
 - Backend
   - Wyświetlanie strony
   - Obsługa wtyczki
