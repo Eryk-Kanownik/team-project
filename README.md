@@ -16,10 +16,6 @@ Prosta aplikacja zbudowana w node.js która jest czatem.
     - Wysyłanie wiadomości
     - Opuszczenie czatu
 
-## Filmik
-
-## Uczestnicy
-
 ## Instalacja i uruchomienie
 
 - Sklonować repozytorium
