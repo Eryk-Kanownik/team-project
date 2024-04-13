@@ -9,6 +9,7 @@ Prosta aplikacja zbudowana w node.js która jest czatem.
   - Obsługa zdarzeń z serwera wtyczki odpowiadających w sekcji Backend
   - Wysyłanie konkretnych zdarzeń do serwera wtyczki
   - Blokowanie pustego pola wiadomości(Zapobieganie przed wysyłaniem pustych stringów)
+  - Przewijaj feed do nowej wiadomości
 - Backend
   - Wyświetlanie strony
   - Obsługa wtyczki
