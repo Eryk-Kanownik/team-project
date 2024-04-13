@@ -15,6 +15,12 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", (socket) => {
+  socket.on("send-message", message => {
+    socket.emit("message-incoming", message)
+  })
+  socket.on("join-user", (username) => {
+    socket.emit("user-joined", username)
+  })
   socket.on("disconnect", () => {
     console.log("User disconnected...");
   });

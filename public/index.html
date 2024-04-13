@@ -8,21 +8,32 @@
       defer
       src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.4/socket.io.js"></script>
     <link rel="stylesheet" href="./assets/index/style.css" />
+    <script defer src="./assets/index/main.js"></script>
   </head>
   <body>
+    <div class="modal" id="modal">
+      <form class="modal-form" id="form">
+        <div class="header">
+          <h2>State your username user!</h2>
+        </div>
+        <div class="content">
+          <input type="text" id="username" placeholder="Username..."/>
+          <button>Submit</button>
+        </div>
+      </form>
+    </div>
     <div class="wrapper">
       <div class="root">
-        <h1 class="title">Chat App</h1>
-        <div class="message-block">
-          <div class="message-card">
-            <p class="username">Username</p>
-            <p class="text">Message</p>
-          </div>
+        <div class="header">
+          <h2 class="title">Chat App</h2>
+        </div>
+        <div class="message-block" id="message-block">
+
         </div>
         <div class="bottom-bar">
-          <form>
-            <input type="text" />
-            <button>Send</button>
+          <form id="message-form">
+            <input type="text" id="message-content"/>
+            <button id="submit-button">Send</button>
           </form>
         </div>
       </div>
