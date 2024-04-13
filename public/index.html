@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>App - Chat</title>
+    <script defer type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
     <script
       defer
       src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.4/socket.io.js"></script>
@@ -28,15 +29,34 @@
           <h2 class="title">Chat App</h2>
         </div>
         <div class="message-block" id="message-block">
-
         </div>
         <div class="bottom-bar">
           <form id="message-form">
-            <input type="text" id="message-content"/>
-            <button id="submit-button">Send</button>
+            <input type="text" id="message-content" placeholder="Message..."/>
+            <button type="button" id="open-emoji"><p class="emoji-icon" id="emoji-icon"></p></button>
+            <button id="submit-button" type="submit">Send</button>
           </form>
         </div>
       </div>
+    </div>
+    <div class="emoji-modal" id="emoji-modal">
+      <div class="close-modal" id="close-modal">&times;</div>
+      <emoji-picker></emoji-picker>
+    </div>
+    <div class="settings">
+      <p>&#x26ED;</p>
+    </div>
+    <div class="modal-settings">
+      <form class="settings-form" id="settings-form">
+        <div class="header">
+          <h2>Change your username!</h2>
+        </div>
+        <div class="content">
+          <input type="text" id="username" placeholder="Username..."/>
+          <button>Submit</button>
+          <button>Close</button>
+        </div>
+      </form>
     </div>
   </body>
 </html>
