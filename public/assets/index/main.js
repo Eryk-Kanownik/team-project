@@ -13,14 +13,14 @@ window.addEventListener("load", (event) => {
         modal.classList.add("modal-invisible")
     }
 })
-
+//Modal
 form.addEventListener("submit", (event) => {
-    event.preventDefault()
-    let username = document.getElementById("username").value;
-    localStorage.setItem("username", username)
-    if(localStorage.getItem("username") !== null){
-        modal.classList.add("modal-invisble")
-    }
+
+        event.preventDefault()
+        let username = document.getElementById("username").value;
+        localStorage.setItem("username", username)
+        modal.classList.add("modal-invisible")
+    
 })
 
 //Send message
