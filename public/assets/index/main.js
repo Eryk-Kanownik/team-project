@@ -19,11 +19,13 @@ const arrayOfEmojis = [
 
 emojiIcon.innerHTML =
   arrayOfEmojis[Math.floor(Math.random() * arrayOfEmojis.length)];
+
 setInterval(() => {
   emojiIcon.innerHTML =
     arrayOfEmojis[Math.floor(Math.random() * arrayOfEmojis.length)];
 }, 5000);
 
+//Set username if does not exist
 window.addEventListener("load", (event) => {
   if (localStorage.getItem("username") === null) {
     modal.classList.remove("modal-invisible");
@@ -34,6 +36,41 @@ window.addEventListener("load", (event) => {
       createNotificationBox(`User ${localStorage.getItem("username")} joined!`)
     );
   }
+  document.getElementById("submit-button").disabled = true;
+});
+
+//Change username
+const modalSettings = document.getElementById("modal-settings");
+const settingsButton = document.getElementById("settings");
+const closeSettings = document.getElementById("close-settings");
+const settingsForm = document.getElementById("settings-form");
+
+settingsForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  let prevUsername = localStorage.getItem("username");
+  let newUsername = document.getElementById("change-username").value;
+  localStorage.setItem("username", newUsername);
+  document.getElementById("change-username").value = "";
+  let obj = {
+    prev: prevUsername,
+    new: newUsername,
+  };
+  socket.emit("change-username", obj);
+  messageBlock.appendChild(
+    createNotificationBox(`User ${obj.prev} changed username to ${obj.new}`)
+  );
+  modalSettings.classList.remove("modal-settings-visible");
+});
+
+settingsButton.addEventListener("click", () => {
+  modalSettings.classList.add("modal-settings-visible");
+  document.getElementById("change-username").value =
+    localStorage.getItem("username");
+});
+
+closeSettings.addEventListener("click", () => {
+  modalSettings.classList.remove("modal-settings-visible");
+  document.getElementById("change-username").value = "";
 });
 
 //Modal
@@ -57,6 +94,7 @@ emojiPicker.addEventListener("emoji-click", (event) => {
   let emoji = event.detail.unicode;
   emojiModal.classList.remove("emoji-modal-visible");
   document.getElementById("message-content").value += emoji;
+  submitButton.disabled = false;
   emojiModal.classList.remove("emoji-modal-visible");
 });
 
@@ -72,8 +110,7 @@ closeEmojiModal.addEventListener("click", (event) => {
 const messageForm = document.getElementById("message-form");
 const messageText = document.getElementById("message-content");
 const submitButton = document.getElementById("submit-button");
-
-messageText.addEventListener("change", (event) => {
+messageText.addEventListener("input", (event) => {
   if (event.target.value.length === 0) {
     submitButton.disabled = true;
   } else {
@@ -91,16 +128,32 @@ messageForm.addEventListener("submit", (event) => {
   };
   socket.emit("send-message", messageObj);
   document.getElementById("message-content").value = "";
+  submitButton.disabled = true;
   messageBlock.appendChild(createMessageBox(messageObj));
+  messageBlock.scrollTo({ top: messageBlock.scrollHeight, behavior: "smooth" });
 });
 
 //Socket events
 socket.on("message-incoming", (message) => {
   messageBlock.appendChild(createMessageBox(message));
+  messageBlock.scrollTo({ top: messageBlock.scrollHeight, behavior: "smooth" });
 });
 
 socket.on("user-joined", (username) => {
   messageBlock.appendChild(createNotificationBox(`User ${username} joined!`));
+  messageBlock.scrollTo({ top: messageBlock.scrollHeight, behavior: "smooth" });
+});
+
+socket.on("user-left", (username) => {
+  messageBlock.appendChild(
+    createNotificationBox(`User ${username} left chat...`)
+  );
+  messageBlock.scrollTo({ top: messageBlock.scrollHeight, behavior: "smooth" });
+});
+
+socket.on("username-changed", (str) => {
+  messageBlock.appendChild(createNotificationBox(str));
+  messageBlock.scrollTo({ top: messageBlock.scrollHeight, behavior: "smooth" });
 });
 
 //DOM Creators
